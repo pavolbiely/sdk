@@ -1,0 +1,19 @@
+{
+	"name": "neoship/sdk",
+	"description": "Library for API communication with Neoship.sk",
+	"authors": [
+		{
+			"name": "Stefan Janckulik",
+			"email": "janckulik@neonus.sk"
+		}
+	],
+	"require": {
+		"php": ">=5.2",
+		"educoder/pest": "1.0.0"
+	},
+    "autoload": {
+        "psr-4": {
+            "Neonus\\Neoship\\": ""
+        }
+    }
+}
