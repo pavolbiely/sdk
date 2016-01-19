@@ -184,6 +184,7 @@ class NeoshipSdk
                 $pest = new PestJSON($this->getRestUrl());
                 $url = "/auth?client_id=" . $this->clientId . "&response_type=code&redirect_uri=" . urlencode($this->redirectUri);
                 header('Location: ' . $this->getOauthUrl() . $url);
+                exit;
             } else {
                 $this->setCode($_GET['code']);
             }
