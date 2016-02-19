@@ -7,8 +7,7 @@ $redirectUri = 'http://www.example.com/neoship/redirect.php';
 
 $neoship = new NeoshipSdk($clientId, $clientSecret, $redirectUri);
 
-// edits existing package with ID 40272 via regular API call
-$neoship->apiPutPackage('40272', array(
+$packagedata = array(
     'package' => array(
         'sender' => array(
             'appelation' => 'Mr',
@@ -37,4 +36,25 @@ $neoship->apiPutPackage('40272', array(
             'phone' => null,
         ),
     ),
-));
+);
+// edits existing package with ID 40272 via regular API call
+$neoship->apiPutPackage('40272', $packagedata);
+
+
+// multi-package api call
+
+$packageCount = 4;
+$variableNumber = '123TEST';
+
+
+for ($i = 1; $i <= $packageCount; $i++) {
+    // sets different variable number for each subpackage
+    $vn = ($packageCount > 1) ? $variableNumber . $i : $variableNumber;
+    $packagedata['package']['variableNumber'] = $vn;
+    if (isset($packagedata['package']['mainPackageNumber']) || $i > 1) {
+        // setting main package variable number for each subpackage
+        $packagedata['package']['mainPackageNumber'] = (isset($packagedata['package']['mainPackageNumber']))? $packagedata['package']['mainPackageNumber'] : $package['variablenumber'] . 1;
+    }
+    // sends each subpackage separately
+    $neoship->apiPostPackage('40272', $packagedata);
+}
