@@ -340,7 +340,8 @@ class NeoshipSdk
     {
         $_SESSION['apiName'] = 'getPackage';
         $_SESSION['data1'] = $id;
-        return json_decode($this->apiCall('/package/' . $id, 'get'));
+        $_SESSION['data2'] = $ref;
+        return json_decode($this->apiCall('/package/' . $id, 'get', ['ref' => $ref]));
     }
     
     /**
@@ -528,7 +529,7 @@ class NeoshipSdk
                 return $this->apiGetStatus($data1);
                 break;
             case 'getPackage':
-                return $this->apiGetPackage($data1);
+                return $this->apiGetPackage($data1, $data2);
                 break;
             case 'getPackageCount':
                 return $this->apiGetPackageCount();
