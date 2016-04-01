@@ -234,6 +234,8 @@ class NeoshipSdk
             
             $pest = new Pest($this->getRestUrl());
             try {
+                unset($_SESSION['data1']);
+                unset($_SESSION['data2']);
                 switch (strtolower($method)) {
                     case 'get':
                         $results = $pest->get($apiName . '?' . http_build_query($oauth));
@@ -500,11 +502,9 @@ class NeoshipSdk
         }
         if (isset($_SESSION['data1']) && $data1 === null) {
             $data1 = $_SESSION['data1'];
-            unset($_SESSION['data1']);
         }
         if (isset($_SESSION['data2']) && $data2 === null) {
             $data2 = $_SESSION['data2'];
-            unset($_SESSION['data2']);
         }
         switch ($apiName) {
             case 'getLog':
