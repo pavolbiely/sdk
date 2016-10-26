@@ -38,7 +38,7 @@ $packagedata = array(
     ),
 );
 // edits existing package with ID 40272 via regular API call
-$neoship->apiPutPackage('40272', $packagedata);
+$neoship->apiPutPackage($packagedata);
 
 
 // multi-package api call
