@@ -421,16 +421,17 @@ class NeoshipSdk
      * Saves sticker PDF to file or outputs it to browser for download
      * @param  [array]  $varNums  variable numbers of packages
      * @param  [string] $filename file for PDF to be written in, downloads file if no filename is given
+     * @param  [bool]  $need      return error if varNums contains non-existing package number
      * @return [mixed]            returns whether write to file was succesfull
      */
-    public function apiGetPackageSticker($varNums, $filename = null)
+    public function apiGetPackageSticker($varNums, $filename = null, $need = true)
     {
         $_SESSION['apiName'] = 'getPackageSticker';
         $_SESSION['data1'] = $varNums;
         if ($filename) {
             $_SESSION['data2'] = $filename;
         }
-        $result = $this->apiCall('/package/sticker', 'get', ['ref' => $varNums]);
+        $result = $this->apiCall('/package/sticker', 'get', ['ref' => $varNums, 'need' => (bool) $need]);
         if ($filename) {
             if (file_put_contents($filename, $result, LOCK_EX)>0) {
                 return true;
